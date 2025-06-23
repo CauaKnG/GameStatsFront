@@ -15,7 +15,7 @@ def cadastrar_partida():
             "gols_fora": int(entry_gols_fora.get())
         }
         response = requests.post(API_URL, json=data)
-        if response.status_code == 201:
+        if response.status_code == 200:
             messagebox.showinfo("Sucesso", "Partida cadastrada com sucesso!")
             listar_partidas()
         else:
@@ -25,7 +25,7 @@ def cadastrar_partida():
 
 def listar_partidas():
     response = requests.get(API_URL)
-    if response.status_code == 200:
+    if response.status_code in [200, 201]:
         limpar_tabela()
         for partida in response.json():
             tree.insert("", "end", values=(
@@ -114,7 +114,7 @@ def main():
     entry_id = tk.Entry(frame_inputs)
     entry_id.grid(row=0, column=1)
 
-    tk.Label(frame_inputs, text="Data (dd/mm/yyyy HH:MM):", bg="#0b6623", fg="white").grid(row=1, column=0)
+    tk.Label(frame_inputs, text="Data e Hora da partida:", bg="#0b6623", fg="white").grid(row=1, column=0)
     entry_data = tk.Entry(frame_inputs)
     entry_data.grid(row=1, column=1)
 
@@ -141,8 +141,8 @@ def main():
     frame_botoes = tk.Frame(root, bg="#0b6623")
     frame_botoes.pack(pady=10)
 
-    tk.Button(frame_botoes, text="Cadastrar", command=cadastrar_partida, bg="#228B22", fg="white", width=12).grid(row=0, column=0, padx=5)
-    tk.Button(frame_botoes, text="Listar todas", command=listar_partidas, bg="#1E90FF", fg="white", width=12).grid(row=0, column=1, padx=5)
+    tk.Button(frame_botoes, text="Criar Partida", command=cadastrar_partida, bg="#228B22", fg="white", width=12).grid(row=0, column=0, padx=5)
+    tk.Button(frame_botoes, text="Listar Partidas", command=listar_partidas, bg="#1E90FF", fg="white", width=12).grid(row=0, column=1, padx=5)
     tk.Button(frame_botoes, text="Listar por ID", command=listar_partida_por_id, bg="#DAA520", fg="white", width=12).grid(row=0, column=2, padx=5)
     tk.Button(frame_botoes, text="Atualizar", command=atualizar_partida, bg="#8B008B", fg="white", width=12).grid(row=0, column=3, padx=5)
     tk.Button(frame_botoes, text="Deletar", command=deletar_partida, bg="#B22222", fg="white", width=12).grid(row=0, column=4, padx=5)
@@ -152,6 +152,8 @@ def main():
         tree.heading(col, text=col)
         tree.column(col, width=100)
     tree.pack(pady=10)
+
+    listar_partidas()
 
     root.mainloop()
 
