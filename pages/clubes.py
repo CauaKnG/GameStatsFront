@@ -5,6 +5,7 @@ import requests
 API_URL = "http://127.0.0.1:8000/clubes/"
 
 def listar_clubes():
+    global tree
     for item in tree.get_children():
         tree.delete(item)
 
@@ -20,6 +21,7 @@ def listar_clubes():
         messagebox.showerror("Erro", f"Falha ao buscar clubes: {e}")
 
 def buscar_por_id():
+    global entry_id, entry_nome, entry_cidade, entry_liga, tree
     clube_id = entry_id.get()
     if not clube_id:
         messagebox.showwarning("Campos obrigatórios", "Informe o ID do clube que deseja buscar.")
@@ -50,6 +52,7 @@ def buscar_por_id():
         messagebox.showerror("Erro", f"Falha ao buscar clube por ID: {e}")
 
 def cadastrar_clube():
+    global entry_nome, entry_cidade, entry_liga
     nome = entry_nome.get()
     cidade = entry_cidade.get()
     nome_liga = entry_liga.get()
@@ -70,6 +73,7 @@ def cadastrar_clube():
         messagebox.showerror("Erro", f"Falha ao cadastrar clube: {e}")
 
 def atualizar_clube():
+    global entry_id, entry_nome, entry_cidade, entry_liga
     clube_id = entry_id.get()
     nome = entry_nome.get()
     cidade = entry_cidade.get()
@@ -105,6 +109,7 @@ def atualizar_clube():
         messagebox.showerror("Erro", f"Falha ao atualizar clube: {e}")
 
 def deletar_clube():
+    global entry_id
     clube_id = entry_id.get()
 
     if not clube_id:
@@ -126,6 +131,7 @@ def deletar_clube():
             messagebox.showerror("Erro", f"Falha ao excluir clube: {e}")
 
 def preencher_campos(event):
+    global entry_id, entry_nome, entry_cidade, entry_liga, tree
     selected_item = tree.selection()
     if selected_item:
         item = tree.item(selected_item)
@@ -139,64 +145,70 @@ def preencher_campos(event):
         entry_cidade.insert(0, item["values"][2])
         entry_liga.insert(0, item["values"][3])
 
-root = tk.Tk()
-root.title("Gerenciamento de Clubes - Futebol")
-root.configure(bg="#1e5631")  
+def main():
+    global root, entry_id, entry_nome, entry_cidade, entry_liga, tree 
 
-frame_inputs = tk.Frame(root, bg="#1e5631")
-frame_inputs.pack(pady=10)
+    root = tk.Tk()
+    root.title("Gerenciamento de Clubes - Futebol")
+    root.configure(bg="#1e5631")  
 
-tk.Label(frame_inputs, text="ID do Clube:", bg="#1e5631", fg="white").grid(row=0, column=0, padx=5, pady=5, sticky="e")
-entry_id = tk.Entry(frame_inputs, width=30)
-entry_id.grid(row=0, column=1, padx=5, pady=5)
+    frame_inputs = tk.Frame(root, bg="#1e5631")
+    frame_inputs.pack(pady=10)
 
-tk.Label(frame_inputs, text="Nome do Clube:", bg="#1e5631", fg="white").grid(row=1, column=0, padx=5, pady=5, sticky="e")
-entry_nome = tk.Entry(frame_inputs, width=30)
-entry_nome.grid(row=1, column=1, padx=5, pady=5)
+    tk.Label(frame_inputs, text="ID do Clube:", bg="#1e5631", fg="white").grid(row=0, column=0, padx=5, pady=5, sticky="e")
+    entry_id = tk.Entry(frame_inputs, width=30)
+    entry_id.grid(row=0, column=1, padx=5, pady=5)
 
-tk.Label(frame_inputs, text="Cidade:", bg="#1e5631", fg="white").grid(row=2, column=0, padx=5, pady=5, sticky="e")
-entry_cidade = tk.Entry(frame_inputs, width=30)
-entry_cidade.grid(row=2, column=1, padx=5, pady=5)
+    tk.Label(frame_inputs, text="Nome do Clube:", bg="#1e5631", fg="white").grid(row=1, column=0, padx=5, pady=5, sticky="e")
+    entry_nome = tk.Entry(frame_inputs, width=30)
+    entry_nome.grid(row=1, column=1, padx=5, pady=5)
 
-tk.Label(frame_inputs, text="Nome da Liga:", bg="#1e5631", fg="white").grid(row=3, column=0, padx=5, pady=5, sticky="e")
-entry_liga = tk.Entry(frame_inputs, width=30)
-entry_liga.grid(row=3, column=1, padx=5, pady=5)
+    tk.Label(frame_inputs, text="Cidade:", bg="#1e5631", fg="white").grid(row=2, column=0, padx=5, pady=5, sticky="e")
+    entry_cidade = tk.Entry(frame_inputs, width=30)
+    entry_cidade.grid(row=2, column=1, padx=5, pady=5)
 
-frame_botoes = tk.Frame(root, bg="#1e5631")
-frame_botoes.pack(pady=5)
+    tk.Label(frame_inputs, text="Nome da Liga:", bg="#1e5631", fg="white").grid(row=3, column=0, padx=5, pady=5, sticky="e")
+    entry_liga = tk.Entry(frame_inputs, width=30)
+    entry_liga.grid(row=3, column=1, padx=5, pady=5)
 
-btn_cadastrar = tk.Button(frame_botoes, text="Cadastrar", bg="#2e8b57", fg="white", command=cadastrar_clube)
-btn_cadastrar.pack(side=tk.LEFT, padx=5)
+    frame_botoes = tk.Frame(root, bg="#1e5631")
+    frame_botoes.pack(pady=5)
 
-btn_atualizar = tk.Button(frame_botoes, text="Atualizar", bg="#f4a261", fg="black", command=atualizar_clube)
-btn_atualizar.pack(side=tk.LEFT, padx=5)
+    btn_cadastrar = tk.Button(frame_botoes, text="Cadastrar", bg="#2e8b57", fg="white", command=cadastrar_clube)
+    btn_cadastrar.pack(side=tk.LEFT, padx=5)
 
-btn_deletar = tk.Button(frame_botoes, text="Deletar", bg="#e63946", fg="white", command=deletar_clube)
-btn_deletar.pack(side=tk.LEFT, padx=5)
+    btn_atualizar = tk.Button(frame_botoes, text="Atualizar", bg="#f4a261", fg="black", command=atualizar_clube)
+    btn_atualizar.pack(side=tk.LEFT, padx=5)
 
-btn_listar = tk.Button(frame_botoes, text="Listar Tudo", bg="#264653", fg="white", command=listar_clubes)
-btn_listar.pack(side=tk.LEFT, padx=5)
+    btn_deletar = tk.Button(frame_botoes, text="Deletar", bg="#e63946", fg="white", command=deletar_clube)
+    btn_deletar.pack(side=tk.LEFT, padx=5)
 
-btn_buscar_id = tk.Button(frame_botoes, text="Buscar por ID", bg="#457b9d", fg="white", command=buscar_por_id)
-btn_buscar_id.pack(side=tk.LEFT, padx=5)
+    btn_listar = tk.Button(frame_botoes, text="Listar Tudo", bg="#264653", fg="white", command=listar_clubes)
+    btn_listar.pack(side=tk.LEFT, padx=5)
 
-frame_tabela = tk.Frame(root, bg="#1e5631")
-frame_tabela.pack(pady=10)
+    btn_buscar_id = tk.Button(frame_botoes, text="Buscar por ID", bg="#457b9d", fg="white", command=buscar_por_id)
+    btn_buscar_id.pack(side=tk.LEFT, padx=5)
 
-colunas = ("ID", "Nome", "Cidade", "Liga")
-tree = ttk.Treeview(frame_tabela, columns=colunas, show="headings")
-tree.heading("ID", text="ID")
-tree.heading("Nome", text="Nome")
-tree.heading("Cidade", text="Cidade")
-tree.heading("Liga", text="Liga")
-tree.column("ID", width=50)
-tree.column("Nome", width=150)
-tree.column("Cidade", width=150)
-tree.column("Liga", width=150)
-tree.pack()
+    frame_tabela = tk.Frame(root, bg="#1e5631")
+    frame_tabela.pack(pady=10)
 
-tree.bind("<<TreeviewSelect>>", preencher_campos)
+    colunas = ("ID", "Nome", "Cidade", "Liga")
+    tree = ttk.Treeview(frame_tabela, columns=colunas, show="headings")
+    tree.heading("ID", text="ID")
+    tree.heading("Nome", text="Nome")
+    tree.heading("Cidade", text="Cidade")
+    tree.heading("Liga", text="Liga")
+    tree.column("ID", width=50)
+    tree.column("Nome", width=150)
+    tree.column("Cidade", width=150)
+    tree.column("Liga", width=150)
+    tree.pack()
 
-listar_clubes()
+    tree.bind("<<TreeviewSelect>>", preencher_campos)
 
-root.mainloop()
+    listar_clubes()
+
+    root.mainloop()
+
+if __name__ == "__main__":
+    main()
