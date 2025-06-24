@@ -112,31 +112,31 @@ def main():
 
     tk.Label(frame_inputs, text="ID:", bg="#0b6623", fg="white").grid(row=0, column=0)
     entry_id = tk.Entry(frame_inputs)
-    entry_id.grid(row=0, column=1)
+    entry_id.grid(row=0, column=1, padx=5, pady=5)
 
     tk.Label(frame_inputs, text="Data e Hora da partida:", bg="#0b6623", fg="white").grid(row=1, column=0)
     entry_data = tk.Entry(frame_inputs)
-    entry_data.grid(row=1, column=1)
+    entry_data.grid(row=1, column=1, padx=5, pady=5)
 
     tk.Label(frame_inputs, text="Local:", bg="#0b6623", fg="white").grid(row=2, column=0)
     entry_local = tk.Entry(frame_inputs)
-    entry_local.grid(row=2, column=1)
+    entry_local.grid(row=2, column=1, padx=5, pady=5)
 
     tk.Label(frame_inputs, text="Clube Casa:", bg="#0b6623", fg="white").grid(row=3, column=0)
     entry_clube_casa = tk.Entry(frame_inputs)
-    entry_clube_casa.grid(row=3, column=1)
+    entry_clube_casa.grid(row=3, column=1, padx=5, pady=5)
 
     tk.Label(frame_inputs, text="Clube Fora:", bg="#0b6623", fg="white").grid(row=4, column=0)
     entry_clube_fora = tk.Entry(frame_inputs)
-    entry_clube_fora.grid(row=4, column=1)
+    entry_clube_fora.grid(row=4, column=1, padx=5, pady=5)
 
     tk.Label(frame_inputs, text="Gols Casa:", bg="#0b6623", fg="white").grid(row=5, column=0)
     entry_gols_casa = tk.Entry(frame_inputs)
-    entry_gols_casa.grid(row=5, column=1)
+    entry_gols_casa.grid(row=5, column=1, padx=5, pady=5)
 
     tk.Label(frame_inputs, text="Gols Fora:", bg="#0b6623", fg="white").grid(row=6, column=0)
     entry_gols_fora = tk.Entry(frame_inputs)
-    entry_gols_fora.grid(row=6, column=1)
+    entry_gols_fora.grid(row=6, column=1, padx=5, pady=5)
 
     frame_botoes = tk.Frame(root, bg="#0b6623")
     frame_botoes.pack(pady=10)
