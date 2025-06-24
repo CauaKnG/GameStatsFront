@@ -123,58 +123,55 @@ def preencher_campos(event):
         entry_nome.insert(0, item["values"][1])
         entry_pais.insert(0, item["values"][2])
 
-root = tk.Tk()
-root.title("Gerenciamento de Ligas - Futebol")
-root.configure(bg="#1e5631")  
+def main():
+    global root, entry_id, entry_nome, entry_pais, tree
 
-frame_inputs = tk.Frame(root, bg="#1e5631")
-frame_inputs.pack(pady=10)
+    root = tk.Tk()
+    root.title("Gerenciamento de Ligas - Futebol")
+    root.configure(bg="#1e5631")  
 
-tk.Label(frame_inputs, text="ID da Liga:", bg="#1e5631", fg="white").grid(row=0, column=0, padx=5, pady=5, sticky="e")
-entry_id = tk.Entry(frame_inputs, width=30)
-entry_id.grid(row=0, column=1, padx=5, pady=5)
+    frame_inputs = tk.Frame(root, bg="#1e5631")
+    frame_inputs.pack(pady=10)
 
-tk.Label(frame_inputs, text="Nome da Liga:", bg="#1e5631", fg="white").grid(row=1, column=0, padx=5, pady=5, sticky="e")
-entry_nome = tk.Entry(frame_inputs, width=30)
-entry_nome.grid(row=1, column=1, padx=5, pady=5)
+    tk.Label(frame_inputs, text="ID da Liga:", bg="#1e5631", fg="white").grid(row=0, column=0, padx=5, pady=5, sticky="e")
+    entry_id = tk.Entry(frame_inputs, width=30)
+    entry_id.grid(row=0, column=1, padx=5, pady=5)
 
-tk.Label(frame_inputs, text="País:", bg="#1e5631", fg="white").grid(row=2, column=0, padx=5, pady=5, sticky="e")
-entry_pais = tk.Entry(frame_inputs, width=30)
-entry_pais.grid(row=2, column=1, padx=5, pady=5)
+    tk.Label(frame_inputs, text="Nome da Liga:", bg="#1e5631", fg="white").grid(row=1, column=0, padx=5, pady=5, sticky="e")
+    entry_nome = tk.Entry(frame_inputs, width=30)
+    entry_nome.grid(row=1, column=1, padx=5, pady=5)
 
-frame_botoes = tk.Frame(root, bg="#1e5631")
-frame_botoes.pack(pady=5)
+    tk.Label(frame_inputs, text="País:", bg="#1e5631", fg="white").grid(row=2, column=0, padx=5, pady=5, sticky="e")
+    entry_pais = tk.Entry(frame_inputs, width=30)
+    entry_pais.grid(row=2, column=1, padx=5, pady=5)
 
-btn_cadastrar = tk.Button(frame_botoes, text="Cadastrar", bg="#2e8b57", fg="white", command=cadastrar_liga)
-btn_cadastrar.pack(side=tk.LEFT, padx=5)
+    frame_botoes = tk.Frame(root, bg="#1e5631")
+    frame_botoes.pack(pady=5)
 
-btn_atualizar = tk.Button(frame_botoes, text="Atualizar", bg="#f4a261", fg="black", command=atualizar_liga)
-btn_atualizar.pack(side=tk.LEFT, padx=5)
+    tk.Button(frame_botoes, text="Cadastrar", bg="#2e8b57", fg="white", command=cadastrar_liga).pack(side=tk.LEFT, padx=5)
+    tk.Button(frame_botoes, text="Atualizar", bg="#f4a261", fg="black", command=atualizar_liga).pack(side=tk.LEFT, padx=5)
+    tk.Button(frame_botoes, text="Deletar", bg="#e63946", fg="white", command=deletar_liga).pack(side=tk.LEFT, padx=5)
+    tk.Button(frame_botoes, text="Listar", bg="#264653", fg="white", command=listar_ligas).pack(side=tk.LEFT, padx=5)
+    tk.Button(frame_botoes, text="Buscar por ID", bg="#457b9d", fg="white", command=buscar_por_id).pack(side=tk.LEFT, padx=5)
 
-btn_deletar = tk.Button(frame_botoes, text="Deletar", bg="#e63946", fg="white", command=deletar_liga)
-btn_deletar.pack(side=tk.LEFT, padx=5)
+    frame_tabela = tk.Frame(root, bg="#1e5631")
+    frame_tabela.pack(pady=10)
 
-btn_listar = tk.Button(frame_botoes, text="Listar", bg="#264653", fg="white", command=listar_ligas)
-btn_listar.pack(side=tk.LEFT, padx=5)
+    colunas = ("ID", "Nome", "País")
+    tree = ttk.Treeview(frame_tabela, columns=colunas, show="headings")
+    tree.heading("ID", text="ID")
+    tree.heading("Nome", text="Nome")
+    tree.heading("País", text="País")
+    tree.column("ID", width=50)
+    tree.column("Nome", width=200)
+    tree.column("País", width=150)
+    tree.pack()
 
-btn_buscar_id = tk.Button(frame_botoes, text="Buscar por ID", bg="#457b9d", fg="white", command=buscar_por_id)
-btn_buscar_id.pack(side=tk.LEFT, padx=5)
+    tree.bind("<<TreeviewSelect>>", preencher_campos)
 
-frame_tabela = tk.Frame(root, bg="#1e5631")
-frame_tabela.pack(pady=10)
+    listar_ligas()
 
-colunas = ("ID", "Nome", "País")
-tree = ttk.Treeview(frame_tabela, columns=colunas, show="headings")
-tree.heading("ID", text="ID")
-tree.heading("Nome", text="Nome")
-tree.heading("País", text="País")
-tree.column("ID", width=50)
-tree.column("Nome", width=200)
-tree.column("País", width=150)
-tree.pack()
+    root.mainloop()
 
-tree.bind("<<TreeviewSelect>>", preencher_campos)
-
-listar_ligas()
-
-root.mainloop()
+if __name__ == "__main__":
+    main()
