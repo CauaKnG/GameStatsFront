@@ -183,51 +183,51 @@ def main():
 
     root = tk.Tk()
     root.title("Gerenciamento de Jogadores - Futebol")
-    root.configure(bg="#1e5631")  
+    root.configure(bg="#0b6623")  
 
-    frame_inputs = tk.Frame(root, bg="#1e5631")
+    frame_inputs = tk.Frame(root, bg="#0b6623")
     frame_inputs.pack(pady=10)
 
-    tk.Label(frame_inputs, text="ID do Jogador:", bg="#1e5631", fg="white").grid(row=0, column=0, padx=5, pady=5, sticky="e")
+    tk.Label(frame_inputs, text="ID do Jogador:", bg="#0b6623", fg="white").grid(row=0, column=0, padx=5, pady=5, sticky="e")
     entry_id = tk.Entry(frame_inputs, width=30)
     entry_id.grid(row=0, column=1, padx=5, pady=5)
 
-    tk.Label(frame_inputs, text="Nome:", bg="#1e5631", fg="white").grid(row=1, column=0, padx=5, pady=5, sticky="e")
+    tk.Label(frame_inputs, text="Nome:", bg="#0b6623", fg="white").grid(row=1, column=0, padx=5, pady=5, sticky="e")
     entry_nome = tk.Entry(frame_inputs, width=30)
     entry_nome.grid(row=1, column=1, padx=5, pady=5)
 
-    tk.Label(frame_inputs, text="Idade:", bg="#1e5631", fg="white").grid(row=2, column=0, padx=5, pady=5, sticky="e")
+    tk.Label(frame_inputs, text="Idade:", bg="#0b6623", fg="white").grid(row=2, column=0, padx=5, pady=5, sticky="e")
     entry_idade = tk.Entry(frame_inputs, width=30)
     entry_idade.grid(row=2, column=1, padx=5, pady=5)
 
-    tk.Label(frame_inputs, text="Posição:", bg="#1e5631", fg="white").grid(row=3, column=0, padx=5, pady=5, sticky="e")
+    tk.Label(frame_inputs, text="Posição:", bg="#0b6623", fg="white").grid(row=3, column=0, padx=5, pady=5, sticky="e")
     entry_posicao = tk.Entry(frame_inputs, width=30)
     entry_posicao.grid(row=3, column=1, padx=5, pady=5)
 
-    tk.Label(frame_inputs, text="Overall:", bg="#1e5631", fg="white").grid(row=4, column=0, padx=5, pady=5, sticky="e")
+    tk.Label(frame_inputs, text="Overall:", bg="#0b6623", fg="white").grid(row=4, column=0, padx=5, pady=5, sticky="e")
     entry_overall = tk.Entry(frame_inputs, width=30)
     entry_overall.grid(row=4, column=1, padx=5, pady=5)
 
-    tk.Label(frame_inputs, text="Nome do Clube:", bg="#1e5631", fg="white").grid(row=5, column=0, padx=5, pady=5, sticky="e")
+    tk.Label(frame_inputs, text="Nome do Clube:", bg="#0b6623", fg="white").grid(row=5, column=0, padx=5, pady=5, sticky="e")
     entry_clube = tk.Entry(frame_inputs, width=30)
     entry_clube.grid(row=5, column=1, padx=5, pady=5)
 
-    frame_botoes = tk.Frame(root, bg="#1e5631")
+    frame_botoes = tk.Frame(root, bg="#0b6623")
     frame_botoes.pack(pady=5)
 
-    btn_cadastrar = tk.Button(frame_botoes, text="Cadastrar", bg="#2e8b57", fg="white", command=cadastrar_jogador)
+    btn_cadastrar = tk.Button(frame_botoes, text="Cadastrar", bg="#228B22", fg="white", command=cadastrar_jogador)
     btn_cadastrar.pack(side=tk.LEFT, padx=5)
 
-    btn_atualizar = tk.Button(frame_botoes, text="Atualizar", bg="#f4a261", fg="black", command=atualizar_jogador)
+    btn_atualizar = tk.Button(frame_botoes, text="Atualizar", bg="#8B008B", fg="black", command=atualizar_jogador)
     btn_atualizar.pack(side=tk.LEFT, padx=5)
 
-    btn_deletar = tk.Button(frame_botoes, text="Deletar", bg="#e63946", fg="white", command=deletar_jogador)
+    btn_deletar = tk.Button(frame_botoes, text="Deletar", bg="#B22222", fg="white", command=deletar_jogador)
     btn_deletar.pack(side=tk.LEFT, padx=5)
 
-    btn_listar = tk.Button(frame_botoes, text="Listar Tudo", bg="#264653", fg="white", command=listar_jogadores)
+    btn_listar = tk.Button(frame_botoes, text="Listar Tudo", bg="#1E90FF", fg="white", command=listar_jogadores)
     btn_listar.pack(side=tk.LEFT, padx=5)
 
-    btn_buscar_id = tk.Button(frame_botoes, text="Buscar por ID", bg="#457b9d", fg="white", command=buscar_por_id)
+    btn_buscar_id = tk.Button(frame_botoes, text="Buscar por ID", bg="#DAA520", fg="black", command=buscar_por_id)
     btn_buscar_id.pack(side=tk.LEFT, padx=5)
 
     frame_tabela = tk.Frame(root, bg="#1e5631")

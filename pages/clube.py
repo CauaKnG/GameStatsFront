@@ -149,59 +149,45 @@ def main():
     global root, entry_id, entry_nome, entry_cidade, entry_liga, tree 
 
     root = tk.Tk()
-    root.title("Gerenciamento de Clubes - Futebol")
-    root.configure(bg="#1e5631")  
+    root.title("🏟️ Gestão de Clubes ⚽")
+    root.configure(bg="#0b6623")  
 
-    frame_inputs = tk.Frame(root, bg="#1e5631")
+    frame_inputs = tk.Frame(root, bg="#0b6623")
     frame_inputs.pack(pady=10)
 
-    tk.Label(frame_inputs, text="ID do Clube:", bg="#1e5631", fg="white").grid(row=0, column=0, padx=5, pady=5, sticky="e")
+    tk.Label(frame_inputs, text="ID do Clube:", bg="#0b6623", fg="white").grid(row=0, column=0, padx=5, pady=5, sticky="e")
     entry_id = tk.Entry(frame_inputs, width=30)
     entry_id.grid(row=0, column=1, padx=5, pady=5)
 
-    tk.Label(frame_inputs, text="Nome do Clube:", bg="#1e5631", fg="white").grid(row=1, column=0, padx=5, pady=5, sticky="e")
+    tk.Label(frame_inputs, text="Nome do Clube:", bg="#0b6623", fg="white").grid(row=1, column=0, padx=5, pady=5, sticky="e")
     entry_nome = tk.Entry(frame_inputs, width=30)
     entry_nome.grid(row=1, column=1, padx=5, pady=5)
 
-    tk.Label(frame_inputs, text="Cidade:", bg="#1e5631", fg="white").grid(row=2, column=0, padx=5, pady=5, sticky="e")
+    tk.Label(frame_inputs, text="Cidade:", bg="#0b6623", fg="white").grid(row=2, column=0, padx=5, pady=5, sticky="e")
     entry_cidade = tk.Entry(frame_inputs, width=30)
     entry_cidade.grid(row=2, column=1, padx=5, pady=5)
 
-    tk.Label(frame_inputs, text="Nome da Liga:", bg="#1e5631", fg="white").grid(row=3, column=0, padx=5, pady=5, sticky="e")
+    tk.Label(frame_inputs, text="Nome da Liga:", bg="#0b6623", fg="white").grid(row=3, column=0, padx=5, pady=5, sticky="e")
     entry_liga = tk.Entry(frame_inputs, width=30)
     entry_liga.grid(row=3, column=1, padx=5, pady=5)
 
-    frame_botoes = tk.Frame(root, bg="#1e5631")
+    frame_botoes = tk.Frame(root, bg="#0b6623")
     frame_botoes.pack(pady=5)
 
-    btn_cadastrar = tk.Button(frame_botoes, text="Cadastrar", bg="#2e8b57", fg="white", command=cadastrar_clube)
-    btn_cadastrar.pack(side=tk.LEFT, padx=5)
+    tk.Button(frame_botoes, text="Cadastrar", bg="#228B22", fg="white", command=cadastrar_clube).pack(side=tk.LEFT, padx=5)
+    tk.Button(frame_botoes, text="Atualizar", bg="#8B008B", fg="white", command=atualizar_clube).pack(side=tk.LEFT, padx=5)
+    tk.Button(frame_botoes, text="Deletar", bg="#B22222", fg="white", command=deletar_clube).pack(side=tk.LEFT, padx=5)
+    tk.Button(frame_botoes, text="Listar Tudo", bg="#1E90FF", fg="white", command=listar_clubes).pack(side=tk.LEFT, padx=5)
+    tk.Button(frame_botoes, text="Buscar por ID", bg="#DAA520", fg="black", command=buscar_por_id).pack(side=tk.LEFT, padx=5)
 
-    btn_atualizar = tk.Button(frame_botoes, text="Atualizar", bg="#f4a261", fg="black", command=atualizar_clube)
-    btn_atualizar.pack(side=tk.LEFT, padx=5)
-
-    btn_deletar = tk.Button(frame_botoes, text="Deletar", bg="#e63946", fg="white", command=deletar_clube)
-    btn_deletar.pack(side=tk.LEFT, padx=5)
-
-    btn_listar = tk.Button(frame_botoes, text="Listar Tudo", bg="#264653", fg="white", command=listar_clubes)
-    btn_listar.pack(side=tk.LEFT, padx=5)
-
-    btn_buscar_id = tk.Button(frame_botoes, text="Buscar por ID", bg="#457b9d", fg="white", command=buscar_por_id)
-    btn_buscar_id.pack(side=tk.LEFT, padx=5)
-
-    frame_tabela = tk.Frame(root, bg="#1e5631")
+    frame_tabela = tk.Frame(root, bg="#0b6623")
     frame_tabela.pack(pady=10)
 
     colunas = ("ID", "Nome", "Cidade", "Liga")
     tree = ttk.Treeview(frame_tabela, columns=colunas, show="headings")
-    tree.heading("ID", text="ID")
-    tree.heading("Nome", text="Nome")
-    tree.heading("Cidade", text="Cidade")
-    tree.heading("Liga", text="Liga")
-    tree.column("ID", width=50)
-    tree.column("Nome", width=150)
-    tree.column("Cidade", width=150)
-    tree.column("Liga", width=150)
+    for col in colunas:
+        tree.heading(col, text=col)
+        tree.column(col, width=120)
     tree.pack()
 
     tree.bind("<<TreeviewSelect>>", preencher_campos)
